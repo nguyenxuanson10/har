@@ -14,7 +14,7 @@ def grlog(y, x):
 
     return u.matmul(s.matmul(v.transpose(-1,-2)))
 
-class PoolingLayerProjector(nn.Module):
+class PoolingLayer(nn.Module):
     def __init__(self, stride=2):
         super().__init__()
         self.stride = stride
@@ -27,7 +27,7 @@ class PoolingLayerProjector(nn.Module):
 
         return output
 
-class OrthoLayerProjector(nn.Module):
+class OrthoLayer(nn.Module):
     def __init__(self, top_eigen=10):
         super().__init__()
         self.top_eigen = top_eigen
