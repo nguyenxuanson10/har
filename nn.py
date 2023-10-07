@@ -4,6 +4,16 @@ import numpy as np
 from torch.autograd import Function as F
 from . import functional
 
+def grlog(y, x):
+    ytx = y.transpose(-1,-2).matmul(x)                                        
+    At = y.transpose(-1,-2).subtract( ytx.matmul(x.transpose(-1,-2)) )            
+    Bt = th.linalg.pinv(ytx).matmul(At)
+    u, s, v = th.svd(Bt.transpose(-1,-2), some=True)                              
+
+    s = th.diag_embed(th.atan(s)) 
+
+    return u.matmul(s.matmul(v.transpose(-1,-2)))
+
 class PoolingLayerProjector(nn.Module):
     def __init__(self, stride=2):
         super().__init__()
