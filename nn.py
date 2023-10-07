@@ -19,8 +19,7 @@ class PoolingLayer(nn.Module):
         super().__init__()
         self.stride = stride
 
-    def forward(self, input):
-        shape = input.shape
+    def forward(self, input):       
         
         m = th.nn.AvgPool2d(self.stride, stride=self.stride)
         output = m(input)        
